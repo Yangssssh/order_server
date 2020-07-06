@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: order-server
+  datasource:
+    url: jdbc:mysql://localhost:3306/cloud?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 1111
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+server:
+  port: 8781
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+#feigen属性配置
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 1000
+  hystrix:
+    enabled: true
+
+#断路器超时间设置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
